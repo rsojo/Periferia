@@ -1,0 +1,64 @@
+﻿@model Periferia.MVC.Models.SimpleSale
+
+@{
+    ViewData["Title"] = "Crear";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var msg = ViewData["Message"];
+}
+
+<div class="d-flex justify-content-center">
+
+    <h1>Crear</h1>
+</div>
+
+<div class="d-flex justify-content-center">
+    <h4>Compra simple</h4>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Product" class="control-label"></label>
+                @Html.DropDownListFor(model => model.ProductId, (IEnumerable<SelectListItem>)ViewBag.lstProd)
+                <span asp-validation-for="Product" class="text-danger"></span>
+                <label asp-for="Client" class="control-label"></label>
+                @Html.DropDownListFor(model => model.ClientId, (IEnumerable<SelectListItem>)ViewBag.lstCli)
+                <span asp-validation-for="Client" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Count" class="control-label"></label>
+                <input asp-for="Count" id="count" type="number" class="form-control" />
+                <span asp-validation-for="Count" class="text-danger"></span>
+            </div>
+            <div class="form-group d-block">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a id="GoBAck" asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @if (@msg != null)
+    {
+        <script type="text/javascript">
+            $.confirm({
+                title: 'Confirmación',
+                content: 'Guardado Completo',
+                buttons: {
+                    Ok: function () {
+                        document.getElementById("GoBAck").click();
+                        }
+                    }
+            });
+        </script>
+    }
+}
+

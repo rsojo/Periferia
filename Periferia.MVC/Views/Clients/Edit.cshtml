@@ -1,0 +1,67 @@
+﻿@model Periferia.MVC.Models.Client
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var msg = ViewData["Message"];
+}
+
+<div class="d-flex justify-content-center">
+
+    <h1>Editar</h1>
+</div>
+
+<div class="d-flex justify-content-center">
+    <h4>Cliente</h4>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+        <form asp-action="Edit"  class="d-inline-block">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="Id" class="form-control" type="hidden" />
+                <div class="form-group  justify-content-center d-inline-block">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group justify-content-center d-inline-block">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                    <label asp-for="DocNumber" class="control-label"></label>
+                    <input asp-for="DocNumber" class="form-control" />
+                    <span asp-validation-for="DocNumber" class="text-danger"></span>
+                </div>
+            <div class="form-group d-block">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a id="GoBAck" asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    @if (@msg != null)
+    {
+        <script type="text/javascript">
+            $.confirm({
+                title: 'Confirmación',
+                content: 'Guardado Completo',
+                buttons: {
+                    Ok: function () {
+                        document.getElementById("GoBAck").click();
+                        }
+                    }
+            });
+        </script>
+    }
+}

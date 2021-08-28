@@ -1,0 +1,70 @@
+﻿@model Periferia.MVC.Models.Product
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var msg = ViewData["Message"];
+}
+<div class="d-flex justify-content-center">
+
+    <h1>Eliminar</h1>
+</div>
+
+<div class="d-flex justify-content-center">
+    <h4>Producto</h4>
+</div>
+
+<div class="d-flex justify-content-center">
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitValue)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.UnitValue)
+                </td>
+                <td>
+                    <form asp-action="Delete">
+                        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                    </form>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a id="GoBAck" asp-action="Index">Regresar</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    @if (@msg != null)
+    {
+        <script type="text/javascript">
+            $.confirm({
+                title: 'Confirmación',
+                content: 'Guardado Completo',
+                buttons: {
+                    Ok: function () {
+                        document.getElementById("GoBAck").click();
+                        }
+                    }
+            });
+        </script>
+    }
+}
